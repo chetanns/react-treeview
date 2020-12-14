@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tree should render correctly in debug mode 1`] = `
+<WithStyles(ForwardRef(TreeView))
+  className="makeStyles-root-1"
+  defaultCollapseIcon={<Memo />}
+  defaultExpandIcon={<Memo />}
+  defaultExpanded={
+    Array [
+      "root",
+    ]
+  }
+>
+  <WithStyles(ForwardRef(TreeItem))
+    key="root"
+    label="Parent"
+    nodeId="root"
+  >
+    <WithStyles(ForwardRef(TreeItem))
+      key="1"
+      label="Child - 1"
+      nodeId="1"
+    />
+    <WithStyles(ForwardRef(TreeItem))
+      key="3"
+      label="Child - 3"
+      nodeId="3"
+    >
+      <WithStyles(ForwardRef(TreeItem))
+        key="4"
+        label="Child - 4"
+        nodeId="4"
+      />
+    </WithStyles(ForwardRef(TreeItem))>
+  </WithStyles(ForwardRef(TreeItem))>
+</WithStyles(ForwardRef(TreeView))>
+`;

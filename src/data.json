@@ -1,0 +1,40 @@
+[
+{
+    "appId": "123dad-we4-ddsd-23ad",
+    "slug": "test-1",
+    "appGroup": "test-23",
+    "endpoints": [
+        {
+           "appId":"123dad-we4-ddsd-23ad",
+           "location":"aws-east-1",
+           "environment":"test-1",
+           "documentUri": "https://test-environment/test1"
+        },
+        {
+            "appId":"123dad-we4-ddsd-23ad",
+            "location":"aws-west-1",
+            "environment":"test-1",
+            "documentUri": "https://test-environment/test2"
+        }
+    ]
+},
+{
+    "appId": "123dad-we4-ddsd-24dd",
+    "slug": "test-1",
+    "appGroup": "test-24",
+    "endpoints": [
+        {
+           "appId":"123dad-we4-ddsd-23dd",
+           "location":"aws-east-2",
+           "environment":"test-2",
+           "documentUri": "https://test-environment/test3"
+        },
+        {
+            "appId":"123dad-we4-ddsd-23dd",
+            "location":"aws-west-2",
+            "environment":"test-2",
+            "documentUri": "https://test-environment/test4"
+        }
+    ]
+}
+]
