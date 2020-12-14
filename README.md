@@ -1,8 +1,8 @@
 # Setup instruction
 
-## npx create-react-app react-tree-view --template typescript
+### npx create-react-app react-tree-view --template typescript
 
-## git init
+### git init
 
 ## git add .
 
