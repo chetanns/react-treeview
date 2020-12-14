@@ -4,10 +4,10 @@
 
 ### git init
 
-## git add .
+### git add .
 
-## git commit -m "new Project creation for react-treeview"
+### git commit -m "new Project creation for react-treeview"
 
-## git remote add origin https://github.com/chetanns/react-treeview.git
+### git remote add origin https://github.com/chetanns/react-treeview.git
 
-## git push -u origin master
+### git push -u origin master
