@@ -1,0 +1,7 @@
+[
+    {"id":"1","title":"work-shift","description":"testing-1","completed":false},
+    {"id":"2","title":"home-shift","description":"testing-2","completed":true},
+    {"id":"3","title":"paper-shift","description":"testing-3","completed":false},
+    {"id":"4","title":"cleaning-shift","description":"testing-4","completed":false},
+    {"id":"5","title":"shopping-shift","description":"testing-5","completed":true}
+]
