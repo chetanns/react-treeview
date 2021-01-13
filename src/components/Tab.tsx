@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import SwipeableViews from "react-swipeable-views";
+import React from "react";
 import { makeStyles, Theme, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
@@ -11,6 +10,9 @@ import AssignmentLateIcon from "@material-ui/icons/List";
 import AssignmentTurnedInIcon from "@material-ui/icons/PlaylistAddCheck";
 import Todos from "./Todos";
 import todos from "../resources/data.json";
+import { AppsOutlined } from "@material-ui/icons";
+import { Divider, IconButton, InputBase, Paper } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/PlaylistAdd";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -57,6 +59,23 @@ const useStyles = makeStyles((theme: Theme) => ({
     m: 1,
     border: 1,
   },
+  text: {
+    width: 871,
+    padding: "2px 4px",
+    display: "flex",
+    alignItems: "center",
+  },
+  input: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
+  },
+  iconButton: {
+    padding: 10,
+  },
+  divider: {
+    height: 28,
+    margin: 4,
+  },
 }));
 
 const defaultProps = {
@@ -71,12 +90,8 @@ export default function FullWidthTabs() {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
   const [todoList, setTodosList] = React.useState(todos);
-
-  useEffect(() => {
-    console.log(`value>>${value}`);
-
-    const original_todos = todos;
-  }, [value, setValue]);
+  const [item, setItem] = React.useState("");
+  const [description, setDescription] = React.useState("");
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -97,13 +112,95 @@ export default function FullWidthTabs() {
     }
   };
 
-  const handleChangeIndex = (index: number) => {
-    setValue(index);
+  const onChangeValue = (
+    evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    console.log(evt.currentTarget.value);
+    setItem(evt.currentTarget.value);
+  };
+
+  const onChangeDescription = (
+    evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    console.log("test");
+    setDescription(evt.currentTarget.value);
+  };
+
+  const addItem = (item: string, description: string) => {
+    let maxId: number =
+      Number(
+        todoList.reduce(
+          (maxId: number, todo: any) =>
+            (maxId = maxId > todo.id ? maxId : todo.id),
+          0
+        )
+      ) + Number(1);
+
+    console.log(`New Item>> ${item} with id : ${maxId}`);
+
+    todoList.push({
+      id: String(maxId),
+      title: item,
+      description: description,
+      completed: false,
+    });
+
+    console.log("Added new item");
+    console.log(`todos>>>${JSON.stringify(todoList)}`);
+
+    setTodosList(todoList);
+    setItem("");
+    setDescription("");
   };
 
   return (
     <div className={classes.root}>
       <Box borderColor="primary.main" {...defaultProps}>
+        <Paper component="form" className={classes.text}>
+          <InputBase
+            className={classes.input}
+            placeholder="Add new title"
+            inputProps={{ "aria-label": "Add new title" }}
+            value={item}
+            onChange={(evt) => onChangeValue(evt)}
+          />
+          <Divider className={classes.divider} orientation="vertical" />
+          <InputBase
+            className={classes.input}
+            placeholder="Add new description"
+            inputProps={{ "aria-label": "Add new description" }}
+            value={description}
+            onChange={(evt) => onChangeDescription(evt)}
+          />
+          <Divider className={classes.divider} orientation="vertical" />
+          <IconButton
+            color="primary"
+            className={classes.iconButton}
+            onClick={() => addItem(item, description)}
+            aria-label="directions"
+          >
+            <AddIcon />
+          </IconButton>
+          <Divider className={classes.divider} orientation="vertical" />
+          <IconButton
+            color="primary"
+            className={classes.iconButton}
+            // onClick={this.findTodo}
+            aria-label="directions"
+          >
+            <AppsOutlined />
+          </IconButton>
+        </Paper>
+
+        <TabPanel value={value} index={0} dir={theme.direction}>
+          <Todos data={todoList} isComplete={true} />
+        </TabPanel>
+        <TabPanel value={value} index={1} dir={theme.direction}>
+          <Todos data={todoList} isComplete={false} />
+        </TabPanel>
+        <TabPanel value={value} index={2} dir={theme.direction}>
+          <Todos data={todoList} isComplete={false} />
+        </TabPanel>
         <AppBar position="static" color="default">
           <Tabs
             value={value}
@@ -126,21 +223,6 @@ export default function FullWidthTabs() {
             />
           </Tabs>
         </AppBar>
-        {/* <SwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      > */}
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <Todos data={todoList} isComplete={true} />
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          <Todos data={todoList} isComplete={false} />
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-          <Todos data={todoList} isComplete={false} />
-        </TabPanel>
-        {/* </SwipeableViews> */}
       </Box>
     </div>
   );
