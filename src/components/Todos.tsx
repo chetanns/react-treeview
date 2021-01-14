@@ -96,7 +96,7 @@ class Todos extends Component<TodoProps, TodoState> {
   handleChange = (evt: React.ChangeEvent<HTMLInputElement>, id: string) => {
     console.log(`Id>>${id}`);
 
-    const todo = todos.find((todo) => Number(todo.id) === Number(id));
+    const todo = todos.find((todo) => Number(todo.id) == Number(id));
 
     if (todo) {
       todo.completed = !todo.completed;
