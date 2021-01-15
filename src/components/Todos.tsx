@@ -73,7 +73,7 @@ interface TodoState {
   todos: any[];
 }
 
-class Todos extends Component<TodoProps, TodoState> {
+class Todos extends Component {
   constructor(props: TodoProps) {
     super(props);
     console.log(`constructor todos>>>${JSON.stringify(this.props.data)}`);

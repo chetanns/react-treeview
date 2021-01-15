@@ -8,7 +8,7 @@ import Box from "@material-ui/core/Box";
 import AssignmentIndIcon from "@material-ui/icons/ListAlt";
 import AssignmentLateIcon from "@material-ui/icons/List";
 import AssignmentTurnedInIcon from "@material-ui/icons/PlaylistAddCheck";
-import Todos from "./Todos";
+import Todo from "./Todo";
 import todos from "../resources/data.json";
 import { AppsOutlined } from "@material-ui/icons";
 import { Divider, IconButton, InputBase, Paper } from "@material-ui/core";
@@ -95,20 +95,28 @@ export default function FullWidthTabs() {
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
-    if (newValue === 0) {
-      console.log(`Selected tabs ALL value>>${newValue}`);
-      setTodosList(todos);
-    } else if (newValue === 1) {
-      console.log(`Selected tabs Active value>>${newValue}`);
-      const activeTodos = todos.filter((todo) => todo.completed === false);
-      console.log(`Active Todos >> ${JSON.stringify(activeTodos)}`);
-      setTodosList(activeTodos);
-    } else if (newValue === 2) {
-      console.log(`Selected tabs Completed value>>${newValue}`);
-      const completedTodos = todos.filter((todo) => todo.completed === true);
 
-      setTodosList(completedTodos);
-      console.log(`Completed Todos >> ${JSON.stringify(todoList)}`);
+    switch (newValue) {
+      case 0: {
+        console.log(`Selected tabs ALL value>>${newValue}`);
+        setTodosList(todos);
+        break;
+      }
+      case 1: {
+        console.log(`Selected tabs Active value>>${newValue}`);
+        const activeTodos = todos.filter((todo) => todo.completed === false);
+        console.log(`Active Todos >> ${JSON.stringify(activeTodos)}`);
+        setTodosList(activeTodos);
+        break;
+      }
+      case 2: {
+        console.log(`Selected tabs Completed value>>${newValue}`);
+        const completedTodos = todos.filter((todo) => todo.completed === true);
+
+        setTodosList(completedTodos);
+        console.log(`Completed Todos >> ${JSON.stringify(todoList)}`);
+        break;
+      }
     }
   };
 
@@ -193,13 +201,13 @@ export default function FullWidthTabs() {
         </Paper>
 
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <Todos data={todoList} isComplete={true} />
+          <Todo data={todoList} isComplete={true} />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <Todos data={todoList} isComplete={false} />
+          <Todo data={todoList} isComplete={false} />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <Todos data={todoList} isComplete={false} />
+          <Todo data={todoList} isComplete={false} />
         </TabPanel>
         <AppBar position="static" color="default">
           <Tabs
