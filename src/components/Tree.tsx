@@ -1,11 +1,11 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TreeView from '@material-ui/lab/TreeView';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import TreeItem from '@material-ui/lab/TreeItem';
-import './utils/string.extensions'
-import dataJson from './data.json';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import TreeView from "@material-ui/lab/TreeView";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import TreeItem from "@material-ui/lab/TreeItem";
+import "../utils/string.extensions";
+import dataJson from "../resources/app-data.json";
 interface RenderTree {
   id: string;
   name: string;
@@ -13,20 +13,20 @@ interface RenderTree {
 }
 
 const data: RenderTree = {
-  id: 'root',
-  name: 'Parent',
+  id: "root",
+  name: "Parent",
   children: [
     {
-      id: '1',
-      name: 'Child - 1',
+      id: "1",
+      name: "Child - 1",
     },
     {
-      id: '3',
-      name: 'Child - 3',
+      id: "3",
+      name: "Child - 3",
       children: [
         {
-          id: '4',
-          name: 'Child - 4',
+          id: "4",
+          name: "Child - 4",
         },
       ],
     },
@@ -44,23 +44,23 @@ const useStyles = makeStyles({
 export default function RecursiveTreeView() {
   const classes = useStyles();
 
-  console.log(`Testing -- > ${dataJson[0].appGroup}`)
+  console.log(`Testing -- > ${dataJson[0].appGroup}`);
 
   const map = new Map<string, string>();
 
-  map.set('1','test-1');
-  map.set('2','test-2');
-  map.set('3','test-3');
-  map.set('4','test-4');
+  map.set("1", "test-1");
+  map.set("2", "test-2");
+  map.set("3", "test-3");
+  map.set("4", "test-4");
 
-  
   console.log("testing".getByDefault());
-  console.log(map.getByDefault('5',"Default-value"));
-  
+  console.log(map.getByDefault("5", "Default-value"));
 
   const renderTree = (nodes: RenderTree) => (
     <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
-      {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
+      {Array.isArray(nodes.children)
+        ? nodes.children.map((node) => renderTree(node))
+        : null}
     </TreeItem>
   );
 
@@ -73,7 +73,7 @@ export default function RecursiveTreeView() {
     <TreeView
       className={classes.root}
       defaultCollapseIcon={<ExpandMoreIcon />}
-      defaultExpanded={['root']}
+      defaultExpanded={["root"]}
       defaultExpandIcon={<ChevronRightIcon />}
     >
       {renderTree(data)}

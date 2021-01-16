@@ -49,7 +49,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.text.secondary,
   },
   itemSpacing: {
-    marginTop: theme.spacing(1.5),
+    marginTop: theme.spacing(1.4),
+    //pl: 4,
+    //marginLeft: theme.spacing(1),
     align: "left",
   },
   strikethrough: {
@@ -71,26 +73,16 @@ export default function Todo(props: todoConfig) {
   const classes = useStyles();
   const [todos, setTodos] = useState(props.data);
 
-  useEffect(() => {
-    console.log(`re-render completed`);
-  }, [setTodos]);
-
   const handleChange = (
     evt: React.ChangeEvent<HTMLInputElement>,
     id: string
   ) => {
-    console.log(`Id>>${id}`);
-
     const todo = todos.find((todo) => Number(todo.id) === Number(id));
 
     if (todo) {
       console.log(`Todo for id ${id} is  ${todo.completed}`);
       todo.completed = !todo.completed;
     }
-
-    console.log(`Todo for id ${id} is set to ${todo.completed}`);
-
-    console.log(`todos>>${JSON.stringify(todos)}`);
 
     setTodos([...todos]);
   };
@@ -119,7 +111,7 @@ export default function Todo(props: todoConfig) {
                   <Grid container spacing={1}>
                     <Grid
                       item
-                      xs={6}
+                      xs={9}
                       className={clsx(classes.itemSpacing, {
                         [classes.strikethrough]:
                           todo.completed && props.isComplete,
@@ -127,7 +119,7 @@ export default function Todo(props: todoConfig) {
                     >
                       &nbsp;{todo.description}
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
                       <FormControlLabel
                         control={
                           <Checkbox
